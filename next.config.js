@@ -2,12 +2,12 @@
 const nextConfig = {
     experimental: {
         appDir: true,
-        serverComponentsExternalPackages: ['mongoose'],
+        serverComponentsExternalPackages: ["mongoose"],
     },
     images: {
         domains: ['lh3.googleusercontent.com'],
     },
-    webppack(config) {
+    webpack(config) {
         config.experiments = {
             ...config.experiments,
             topLevelAwait: true,
