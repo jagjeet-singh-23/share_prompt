@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import Profile from "@components/Profile";
 
 const MyProfile = () => {
@@ -21,11 +21,20 @@ const MyProfile = () => {
     }, []);
 
     const handleEdit = (post) => {
-        router.push(`update-prompt?id=${post._id}`);
+        router.push(`/update-prompt?id=${post._id}`);
     }
 
     const handleDelete = async (post) => {
-
+        const hasConfirmed = confirm('Are you sure you want to delete?');
+        if (hasConfirmed) {
+            try {
+                await fetch(`/api/prompt/${post._id.toString()}`, {
+                    method: 'DELETE',
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        }
     }
     return (
         <Profile
