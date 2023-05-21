@@ -24,7 +24,7 @@ const CreatePrompt = () => {
           tag: post.tag,
           userId: session?.user.id,
         }),
-      })
+      });
       if (response.ok) {
         router.push('/');
       }
