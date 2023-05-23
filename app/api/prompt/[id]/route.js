@@ -22,12 +22,12 @@ export const PATCH = async (req, { params }) => {
         await ConnectToDB();
         const existingPrompt = await Prompt.findById(params.id);
         if (!existingPrompt) {
-            return new Response(JSON.stringify(existingPrompt), { status: 404 })
+            return new Response("Prompt does not exist!", { status: 404 })
         }
         existingPrompt.prompt = prompt;
         existingPrompt.tag = tag;
-        existingPrompt.save();
-        return new Response("Successfully updated the prompt", { status: 200 })
+        await existingPrompt.save();
+        return new Response(JSON.stringify(existingPrompt), { status: 200 })
     } catch (error) {
         return new Response("Error Updating the prompt", { status: 500 })
     }
